@@ -1,0 +1,70 @@
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+  
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+  }
+  
+  @media (min-width: 768px) {
+    .gradient-form {
+      height: 100vh !important;
+    }
+  }
+  @media (min-width: 769px) {
+    .gradient-custom-2 {
+      border-top-right-radius: .3rem;
+      border-bottom-right-radius: .3rem;
+    }
+  }
+
+  /* .gradient-custom-2 {
+    margin-top: 43px;
+  } */
+
+
+
+  .gradient-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+
+.form-container {
+  width: 100%;
+  max-width: 100%; /* Adjust the width as needed */
+  padding: 20px;
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Add border radius */
+  background-color: #f9f9f9; /* Add background color */
+}
+
+.login-form {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.register-form {
+  opacity: 0;
+  display: none;
+  transition: opacity 0.5s ease;
+}
+
+.fade-in {
+  opacity: 1;
+  display: block;
+}
+
+.fade-out {
+  opacity: 0;
+  display: none;
+}
+
+  
+  
+    
