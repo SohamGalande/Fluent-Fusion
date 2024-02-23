@@ -13,7 +13,7 @@ const AllFeedBackList = () => {
 
     const fetchFeedback = async () => {
         try {
-          const response = await axios.get('http://your-api-url/feedback');
+          const response = await axios.get('http://localhost:8080/adminhome/feedback');
           setFeedback(response.data);
         } catch (error) {
           console.error('Error fetching feedback:', error);
@@ -28,16 +28,18 @@ const AllFeedBackList = () => {
           <thead>
             <tr>
               <th>User</th>
-              <th>Role</th>
+              <th>Rating</th>
               <th>Feedback</th>
+              <th>Email</th>
             </tr>
           </thead>
           <tbody>
             {feedback.map(feedbackItem => (
               <tr key={feedbackItem.id}>
-                <td>{feedbackItem.user}</td>
-                <td>{feedbackItem.role}</td>
-                <td>{feedbackItem.feedback}</td>
+                <td>{feedbackItem.name}</td>
+                <td>{feedbackItem.rating}</td>
+                <td>{feedbackItem.message}</td>
+                <td>{feedbackItem.email}</td>
               </tr>
             ))}
           </tbody>

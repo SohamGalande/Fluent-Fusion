@@ -46,7 +46,7 @@ const TutSubmenu = ({ item }) => {
     const showSubnav = () => setSubnav(!subnav);
  
     return (
-        <>
+        <div>
             <SidebarLink
                 to={item.path}
                 onClick={item.subNav && showSubnav}
@@ -79,7 +79,7 @@ const TutSubmenu = ({ item }) => {
                         </DropdownLink>
                     );
                 })}
-        </>
+        </div>
     );
 };
  

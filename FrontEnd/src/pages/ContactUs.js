@@ -5,125 +5,126 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function ContactUs() {
-	const [info, setInfo] = useState({
-		name: '',
-		email: '',
-		message: '',
-		phone: '',
-		uploadedFiles: [],
-		buttonText: 'Submit',
-		uploadPhotosButtonText: 'Upload files',
-	});
-	const { name, email, message, phone, buttonText } = info;
-	
+    const [info, setInfo] = useState({
+        name: '',
+        email: '',
+        message: '',
+        rating: 0, // Added rating state
+        buttonText: 'Submit',
+    });
 
-	const handleSubmit = e => {
-		e.preventDefault();
+    const { name, email, message, rating, buttonText } = info;
 
-		setInfo({ ...info, buttonText: '...sending' });
+    const handleChange = (field) => (event) => {
+        setInfo({ ...info, [field]: event.target.value });
+    };
 
-		axios({
-			method: 'POST',
-			url: 'http://localhost:8080/admin/feedback',
-			data: { name, email, message, phone },
-		})
-			.then(res => {
-				if (res.data.success)
-					toast('🦄 Thanks for your feedback!', {
-						position: 'top-right',
-						autoClose: 5000,
-						hideProgressBar: false,
-						closeOnClick: true,
-						pauseOnHover: true,
-						draggable: true,
-						progress: undefined,
-					});
-				setInfo({
-					...info,
-					name: '',
-					phone: '',
-					email: '',
-					message: '',
-					buttonText: 'Submited',
-					uploadPhotosButtonText: 'Uploaded',
-				});
-			})
-			.catch(err => {
-				if (err.response.data.error) toast.error('Failed, try again!');
-			});
-	};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setInfo({ ...info, buttonText: '...sending' });
 
-	const handleChange = name => e => {
-		setInfo({ ...info, [name]: e.target.value });
-	};
+        axios({
+            method: 'POST',
+            url: 'http://localhost:8080/feedback',
+            data: { name, email, message, rating },
+        })
+            .then((res) => {
+                if (res.data.success)
+                    toast('🦄 Thanks for your feedback!', {
+                        position: 'top-right',
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                    });
+                setInfo({
+                    ...info,
+                    name: '',
+                    email: '',
+                    message: '',
+                    rating: 0,
+                    buttonText: 'Submitted', // Fixed typo in buttonText
+                });
+            })
+            .catch((err) => {
+                if (err.response.data.error) toast.error('Failed, try again!');
+            });
+    };
 
-	
+    return (
+        <div className='form'>
+            <ToastContainer
+                position='top-right'
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+            />
+            <label>
+                <h2>Feedback</h2>
+            </label>
+            <ToastContainer />
 
-	return (
-		<div className='form'>
-			<ToastContainer
-				position='top-right'
-				autoClose={5000}
-				hideProgressBar={false}
-				newestOnTop={false}
-				closeOnClick
-				rtl={false}
-				pauseOnFocusLoss
-				draggable
-			/>
-			<label><h2>Your Feedback Will Help Us</h2></label>
-			<ToastContainer />
-			
-			<Form onSubmit={handleSubmit}>
-				{/* Name */}
-				<Form.Group>
-					<Form.Label>Name</Form.Label>
-					<Form.Control
-						value={name}
-						onChange={handleChange('name')}
-						type='name'
-						placeholder='Enter your name'
-						required
-					/>
-				</Form.Group>
-				{/* Phone */}
-				<Form.Group>
-					<Form.Label>Phone</Form.Label>
-					<Form.Control
-						value={phone}
-						onChange={handleChange('phone')}
-						type='phone'
-						placeholder='Enter your phone number'
-						required
-					/>
-				</Form.Group>
-				{/* email */}
-				<Form.Group>
-					<Form.Label>Email Adress</Form.Label>
-					<Form.Control
-						value={email}
-						onChange={handleChange('email')}
-						type='email'
-						placeholder='Enter email'
-						required
-					/>
-				</Form.Group>
-				{/* text area */}
-				<Form.Group>
-					<Form.Label>Description</Form.Label>
-					<Form.Control
-						onChange={handleChange('message')}
-						as='textarea'
-						value={message}
-						rows={3}
-						required
-					/>
-				</Form.Group>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group>
+                    <Form.Label>Name</Form.Label>
+                    <Form.Control
+                        value={name}
+                        onChange={handleChange('name')}
+                        type='name'
+                        placeholder='Enter your name'
+                        required
+                    />
+                </Form.Group>
 
-				<Button type='submit'>{buttonText}</Button>
-			</Form>
-		</div>
-	);
+                <Form.Group>
+                    <Form.Label>Email Address</Form.Label>
+                    <Form.Control
+                        value={email}
+                        onChange={handleChange('email')}
+                        type='email'
+                        placeholder='Enter email'
+                        required
+                    />
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Rating</Form.Label>
+                    <Form.Control
+                        as='select'
+                        value={rating}
+                        onChange={handleChange('rating')}
+                        required
+                    >
+                        <option value="0">Select Rating</option>
+                        <option value="1">1 Star</option>
+                        <option value="2">2 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="5">5 Stars</option>
+                    </Form.Control>
+                </Form.Group>
+
+                <Form.Group>
+                    <Form.Label>Description</Form.Label>
+                    <Form.Control
+                        onChange={handleChange('message')}
+                        as='textarea'
+                        value={message}
+                        rows={3}
+                        required
+                    />
+                </Form.Group>
+
+                <Button type='submit'>{buttonText}</Button>
+            </Form>
+        </div>
+    );
 }
 
 export default ContactUs;

@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import '../Style/StudHome.css'
+import React, { useState, useEffect } from 'react';
+import '../Style/StudHome.css';
+import axios from 'axios';
 
 const StudHome = () => {
   const [language, setLanguage] = useState('');
@@ -23,57 +24,73 @@ const StudHome = () => {
     }
   };
 
-  const topTutors = [
-    {
-      id: 1,
-      name: "John Doe",
-      language: "English",
-      price: "$30/hr",
-      time: "Available Mon-Fri, 9am-5pm",
-      imageUrl: "https://via.placeholder.com/150"
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      language: "Spanish",
-      price: "$25/hr",
-      time: "Available Tue-Sat, 10am-6pm",
-      imageUrl: "https://via.placeholder.com/150"
-    },
-    {
-        id: 3,
-        name: "John Doe",
-        language: "English",
-        price: "$30/hr",
-        time: "Available Mon-Fri, 9am-5pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-      {
-        id: 4,
-        name: "Jane Smith",
-        language: "Spanish",
-        price: "$25/hr",
-        time: "Available Tue-Sat, 10am-6pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-      {
-        id: 5,
-        name: "John Doe",
-        language: "English",
-        price: "$30/hr",
-        time: "Available Mon-Fri, 9am-5pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-      {
-        id: 6,
-        name: "Jane Smith",
-        language: "Spanish",
-        price: "$25/hr",
-        time: "Available Tue-Sat, 10am-6pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-    // Add more top tutors as needed
-  ];
+  
+  const [courseInfoList, setCourseInfoList] = useState([]);
+  
+  useEffect(() => {
+    fetchCourseInfo();
+  }, []);
+
+  const fetchCourseInfo = async () => {
+    try {
+      const response = await axios.get('/api/course-info');
+      setCourseInfoList(response.data);
+    } catch (error) {
+      console.error('Error fetching course info:', error);
+    }
+  };
+
+  // const topTutors = [
+  //   {
+  //     id: 1,
+  //     name: "John Doe",
+  //     language: "English",
+  //     price: "$30/hr",
+  //     time: "Available Mon-Fri, 9am-5pm",
+  //     imageUrl: "https://via.placeholder.com/150"
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Jane Smith",
+  //     language: "Spanish",
+  //     price: "$25/hr",
+  //     time: "Available Tue-Sat, 10am-6pm",
+  //     imageUrl: "https://via.placeholder.com/150"
+  //   },
+  //   {
+  //       id: 3,
+  //       name: "John Doe",
+  //       language: "English",
+  //       price: "$30/hr",
+  //       time: "Available Mon-Fri, 9am-5pm",
+  //       imageUrl: "https://via.placeholder.com/150"
+  //     },
+  //     {
+  //       id: 4,
+  //       name: "Jane Smith",
+  //       language: "Spanish",
+  //       price: "$25/hr",
+  //       time: "Available Tue-Sat, 10am-6pm",
+  //       imageUrl: "https://via.placeholder.com/150"
+  //     },
+  //     {
+  //       id: 5,
+  //       name: "John Doe",
+  //       language: "English",
+  //       price: "$30/hr",
+  //       time: "Available Mon-Fri, 9am-5pm",
+  //       imageUrl: "https://via.placeholder.com/150"
+  //     },
+  //     {
+  //       id: 6,
+  //       name: "Jane Smith",
+  //       language: "Spanish",
+  //       price: "$25/hr",
+  //       time: "Available Tue-Sat, 10am-6pm",
+  //       imageUrl: "https://via.placeholder.com/150"
+  //     },
+  //   // Add more top tutors as needed
+  // ];
 
 
 
@@ -137,8 +154,22 @@ const StudHome = () => {
       </div>
 
       
+      <div>
+        {courseInfoList.map((courseInfo) => (
+          <div key={courseInfo.id} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
 
+          <p>Name: {courseInfo.coursename}</p>
+          <p>Tutor: {courseInfo.tutor.name}</p>
+          <p>Language: {courseInfo.language.name}</p>
+          <p>Duration: {courseInfo.duration.months} months</p>
+          <p>Price: {courseInfo.price}</p>
+        
+          </div>
 
+        ))}
+      </div>
+
+{/* 
       <div className="learning-resources">
         <h2>Top Tutors</h2>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
@@ -158,7 +189,7 @@ const StudHome = () => {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
 
     </div>

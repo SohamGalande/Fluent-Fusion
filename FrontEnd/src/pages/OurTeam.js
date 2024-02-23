@@ -5,25 +5,25 @@ const teamMembers = [
     {
         // imgUrl: team01,
         name: 'Rohit Mahajan',
-        position: 'Position 1'
+        
     },
 
     {
         // imgUrl: team02,
         name: 'Soham Galande',
-        position: 'Position 2'
+        
     },
 
     {
         // imgUrl: team03,
         name: 'Rushikesh',
-        position: 'Position 3 '
+ 
     },
 
     {
         // imgUrl: team04,
         name: 'Balaji',
-        position: 'Position 4'
+      
     },
 ]
 

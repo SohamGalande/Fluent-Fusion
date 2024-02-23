@@ -48,7 +48,7 @@ const TutorSidebar = () => {
     const showSidebar = () => setSidebar(!sidebar);
 
     return (
-        <>
+        <div>
             <IconContext.Provider value={{ color: "red" }}>
                 <Nav>
                     <NavIcon to="#">
@@ -75,7 +75,7 @@ const TutorSidebar = () => {
                     </SidebarWrap>
                 </SidebarNav>
             </IconContext.Provider>
-        </>
+        </div>
     );
 };
 

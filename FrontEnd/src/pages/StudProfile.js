@@ -7,12 +7,13 @@ const StudProfile = () => {
 
     const [studentData, setStudentData] = useState(null);
     
-    const fetchStudentData = async () => {
+   
+   useEffect(() => { const fetchStudentData = async () => {
         try {
-            const userId = sessionStorage.getItem('userId');
+            const Studentid = sessionStorage.getItem('Studentid');
     
-            if (userId) {
-                const response = await axios.get(`http://localhost:8080/Student/${userId}`);
+            if (Studentid) {
+                const response = await axios.get(`http://localhost:8080/Student/details/${Studentid}`);
                 setStudentData(response.data);
             } else {
                 console.error('User ID not found in sessionStorage');
@@ -21,8 +22,8 @@ const StudProfile = () => {
             console.error('Error fetching student data:', error);
         }
     };
-    
     fetchStudentData();
+},[]);
     
 
     return (

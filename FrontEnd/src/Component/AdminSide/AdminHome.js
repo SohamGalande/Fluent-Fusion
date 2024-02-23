@@ -61,9 +61,9 @@ const AdminHome = () => {
                 </thead>
                 <tbody>
                     {languages.map(language => (
-                    <tr key={language.id}>
-                        <td>{language.id}</td>
-                        <td>{language.languages}</td>
+                    <tr key={language.languageId}>
+                        <td>{language.languageId}</td>
+                        <td>{language.name}</td>
                     </tr>
                     ))}
                 </tbody>

@@ -4,7 +4,7 @@ import FooterComp from '../FooterComp'
 
 const PageNotFound = () => {
     return (
-        <>
+        <div>
         <h1 style={{ textAlign: 'center', marginTop: '50px' ,color: 'orange' }} >FluentFusion</h1>
             <Navbar />
             <div style={{ textAlign: 'center', marginTop: '50px' }}>
@@ -16,7 +16,7 @@ const PageNotFound = () => {
 
             <FooterComp/>
 
-        </>
+        </div>
     )
 }
 
