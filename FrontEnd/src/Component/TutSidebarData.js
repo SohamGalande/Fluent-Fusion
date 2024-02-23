@@ -49,4 +49,9 @@ export const TutSidebarData = [
         path: "/tutor/setting",
         icon: <FaIcons.FaCog />,
     },
+    {
+        title:"Add Course",
+        path: "/tutor/addcourse",
+        icon: <FaIcons.FaCog />,
+    }
 ];

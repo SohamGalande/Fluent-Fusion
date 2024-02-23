@@ -11,12 +11,12 @@ import FooterComp from './FooterComp';
 import TutSchedule from '../pages/TutSchedule';
 import ContactUs from '../pages/ContactUs';
 import TutSettings from '../pages/TutSettings';
-
+import AddCourseForm from '../pages/AddCourse';
 
 
 const Tutor = () => {
     return (
-        <>
+        <div>
             <TutSidebar />
 
                 <Routes>
@@ -60,12 +60,16 @@ const Tutor = () => {
                         path="/setting"
                         element={<TutSettings/>}
                     />
+                    <Route
+                        path="/addcourse"
+                        element={<AddCourseForm />}
+                    />    
                     
                 </Routes>
 
             <FooterComp />
 
-        </>
+        </div>
     )
 }
 

@@ -11,9 +11,9 @@ import Settings  from '../pages/Settings';
 import Sidebar from './Sidebar';
 import FooterComp from './FooterComp';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomePage from './HomePage';
 import OurTeam from '../pages/OurTeam';
 import '../Style/Student.css'
+import OurVision from '../pages/OurVision';
 
 function Student() {
   return (
@@ -25,10 +25,9 @@ function Student() {
           <Route path="/home" element={<StudHome />} />
           <Route path="/profile" element={<StudProfile   />} />
           <Route path="/studschedule" element={<StudSchedule />} />
-          <Route path="/studlanguages" element={<StudLang />} />
-          
+          <Route path="/studlanguages" element={<StudLang />} /> 
           <Route path="/about-us/team" element={<OurTeam/>} />
-          
+          <Route path="/about-us/vision" element={<OurVision/>} />
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/support" element={<Support />} />
           <Route path="/setting" element={<Settings />} />

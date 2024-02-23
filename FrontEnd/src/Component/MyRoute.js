@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import HomePage from './HomePage';
@@ -16,6 +16,7 @@ import AllTutList from '../Component/AdminSide/AllTutList';
 import AllFeedBackList from '../Component/AdminSide/AllFeedBackList';
 import AdminHome from './AdminSide/AdminHome';
 
+
 function MyRoute() {
   const location = useLocation();
 
@@ -25,6 +26,14 @@ function MyRoute() {
     return pathname === '/' || pathname === '/login' || pathname === '/Becometutor' || pathname === '/*';
   };
 
+  useEffect(() => {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const { pathname } = location;
+    if (!isLoggedIn && pathname !== '/login' && pathname !== '/Becometutor' && pathname !== '/' && pathname !== '/Admin') {
+      window.location.href = '/login';
+    }
+
+   }, []);
   return (
     <div>
       {/* Conditionally render Navbar and FooterComp */}

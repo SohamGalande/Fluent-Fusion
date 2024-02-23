@@ -5,7 +5,6 @@ import axios from 'axios';
 const Settings = () => {
   const [showPasswordChange, setShowPasswordChange] = useState(false);
   const [student, setStudent] = useState({
-    currentPassword: '',
     newPassword: '',
     confirmPassword: ''
   });
@@ -31,12 +30,17 @@ const Settings = () => {
       setMessage('Please enter both a new password and a confirmation password.');
       return;
     }
+
+    if(newPassword.length < 8) {
+      setMessage('Password must be at least 8 characters long.');
+      return;
+    }
+   
   
-    axios.put(`http://localhost:8080/Student/${userId}`, {userId, newPassword })
+    axios.put(`http://localhost:8080/Student/changepassword/${userId}`, {userId, newPassword })
       .then(response => {
         setMessage(response.data);
         setStudent({
-          currentPassword: '',
           newPassword: '',
           confirmPassword: ''
         });
@@ -60,7 +64,7 @@ const Settings = () => {
 
   useEffect(() => {
     // Fetch user ID from session
-    const userIdFromSession = sessionStorage.getItem('userId');
+    const userIdFromSession = sessionStorage.getItem('Studentid');
     setUserId(userIdFromSession);
   }, []);
 

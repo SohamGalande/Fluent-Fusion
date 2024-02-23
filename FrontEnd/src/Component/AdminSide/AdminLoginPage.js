@@ -36,6 +36,7 @@ const AdminLoginPage = () => {
     if (username === 'admin' && password === 'adminpassword') {
       // Successful login, redirect or perform any other action
       alert('Welcome ADMIN');
+      sessionStorage.setItem('isLoggedIn', true);
       navigate("/admin/adminhome/alllanguage")
     } else {
       setErrorMessage('YOU ARE NOT A ADMIN');
