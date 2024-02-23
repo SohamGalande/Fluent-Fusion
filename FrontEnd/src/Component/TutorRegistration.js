@@ -18,6 +18,7 @@ import './TutorRegistration.css';
 import axios from 'axios';
 
 import img from '../Shared/Images/background2.jpg'; 
+import img1 from '../Shared/Images/tutorbg.jpg'; 
 
 
 export default function TutorRegistration() {
@@ -135,17 +136,17 @@ export default function TutorRegistration() {
 
 
     return (
-        <div>
+        <div className="box1">
             <div className="box">
-                <h4>Fluentify</h4>
+            <h1><strong>Fluent Fusion</strong></h1>
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
-                        <label htmlFor="profilePic" className="form-label">Upload Profile Picture</label>
+                        <label htmlFor="profilePic" className="form-label"><b>Upload Profile Picture</b></label>
                         <input type="file" className="form-control" id="profilePic" name="profilePic" accept=".png, .jpg, .jpeg" onChange={handleFileChange} />
                     </div>
                     {/* Add similar file input for certificate */}
                     <div className="mb-3">
-                        <label htmlFor="certificate" className="form-label">Upload Certificate</label>
+                        <label htmlFor="certificate" className="form-label"><b>Upload Certificate</b></label>
                         <input type="file" className="form-control" id="certificate" name="certificate" accept=".pdf" onChange={handleFileChange} />
                     </div>
                     <input type="text" className="form-control" id="name" name="name" placeholder="Name" onChange={handleInputChange} value={formData.name} />
@@ -154,6 +155,10 @@ export default function TutorRegistration() {
                     <input type="text" className="form-control" id="proficiencyLevel" name="proficiencyLevel" placeholder="Proficiency Level" onChange={handleInputChange} value={formData.proficiencyLevel} />
                     <input type="password" className="form-control" id="password" name="password" placeholder="Password" onChange={handleInputChange} value={formData.password} required />
                     <button type="submit" className="btn btn-primary">Register</button>
+                    <br />
+                    Already on Fluent Fusion?<Link to='/login' className='backtologin'> {/* Use Link instead of anchor tag */}
+                Login
+              </Link>
                 </form>
             </div>
 

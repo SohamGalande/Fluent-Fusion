@@ -2,10 +2,11 @@ import React from 'react';
 import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link } from 'react-router-dom';
 
 function FooterComp() {
   return (
-    <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
+    <MDBFooter bgColor='dark' className='text-center text-lg-start text-muted'>
 
           <hr
             style={{
@@ -28,7 +29,7 @@ function FooterComp() {
       <section className='footercomp'>
         <MDBContainer className='text-center text-md-start mt-5'>
           <MDBRow className='mt-3'>
-            <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
+            <MDBCol md="3" lg="4" xl="3" className='d-flex flex-column justify-content-center align-items-center mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
                 <MDBIcon icon="gem" className="me-3" />
                 <strong>FluentFusion</strong>
@@ -38,21 +39,19 @@ function FooterComp() {
               </p>
             </MDBCol>
 
-            <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
+            <MDBCol md="2" lg="2" xl="2" className='d-flex flex-column justify-content-center align-items-center mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Services</h6>
               <p>
                 <a href='#!' className='text-reset'>
                   Learn Languages
                 </a>
               </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Become Tutor
-                </a>
-              </p>
+              <Link to='/Becometutor' className='text-reset'> {/* Use Link instead of anchor tag */}
+                Become a Tutor
+                </Link>
             </MDBCol>
 
-            <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
+            <MDBCol md="3" lg="2" xl="3" className='d-flex flex-column justify-content-center align-items-center mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
               <p>
                 <a href='#!' className='text-reset'>
@@ -64,19 +63,17 @@ function FooterComp() {
                   Settings
                 </a>
               </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Terms and Conditions
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Help
-                </a>
-              </p>
+              <Link to='/terms&condition' className='text-reset'> {/* Use Link instead of anchor tag */}
+                Terms and Conditions
+                </Link>
+                <p>
+                <Link to='/help' className='text-reset' style={{ margin: '10px' }}> {/* Use Link instead of anchor tag */}
+                Help
+                </Link>
+                </p>
             </MDBCol>
 
-            <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
+            <MDBCol md="4" lg="4" xl="4" className='d-flex flex-column justify-content-center align-items-center mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
               <p>
                 <MDBIcon icon="home" className="me-2" />

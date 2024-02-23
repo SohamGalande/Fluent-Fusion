@@ -15,6 +15,9 @@ import AllStudList from '../Component/AdminSide/AllStudList';
 import AllTutList from '../Component/AdminSide/AllTutList';
 import AllFeedBackList from '../Component/AdminSide/AllFeedBackList';
 import AdminHome from './AdminSide/AdminHome';
+import TermsAndConditions from './TermsAndConditions';
+import helpComp from '../pages/ContactUs';
+
 
 function MyRoute() {
   const location = useLocation();
@@ -44,7 +47,10 @@ function MyRoute() {
                 <Route path='alltutors' element={<AllTutList/>}/>
                 <Route path='allfeedbacks' element={<AllFeedBackList/>}/>
             </Route>
-            
+            <Route path='/help' element={<helpComp />}/>
+
+
+        <Route path='/terms&condition' element={<TermsAndConditions/>}/>    
         <Route path='/*' element={<PageNotFound />}/>
 
       </Routes>

@@ -13,8 +13,8 @@ function CardLanguages() {
   return (
     <MDBRow>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4'  className='my-3'>
+        <MDBCard border='3' shadow='5' >
           <MDBCardBody>
             <MDBCardTitle><strong>Japanese</strong></MDBCardTitle>
             <MDBCardText>
@@ -25,8 +25,8 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>German</strong></MDBCardTitle>
             <MDBCardText>
@@ -37,8 +37,8 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>Italian</strong></MDBCardTitle>
             <MDBCardText>
@@ -49,8 +49,8 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>Chinese</strong></MDBCardTitle>
             <MDBCardText>
@@ -61,8 +61,8 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3' >
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>Spanish</strong></MDBCardTitle>
             <MDBCardText>
@@ -73,8 +73,8 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4'  className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>French</strong></MDBCardTitle>
             <MDBCardText>
@@ -85,8 +85,8 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>English</strong></MDBCardTitle>
             <MDBCardText>
@@ -97,20 +97,20 @@ function CardLanguages() {
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
-            <MDBCardTitle><strong>Hindi</strong></MDBCardTitle>
+            <MDBCardTitle><strong>Russian</strong></MDBCardTitle>
             <MDBCardText>
-              <p>Hindi (Hindi:हिन्दी,Hindī) is an Indo-Aryan language spoken chiefly in North India, and serves as the lingua franca of the Hindi Belt region encompassing parts of northern, central, eastern, and western India. Hindi has been described as a standardised and Sanskritised register[19] of the Hindustani language, which itself is based primarily on the Khariboli dialect of Delhi and neighbouring areas of North India</p>
+              <p>Russian, originating from Old East Slavic, evolved in the medieval Kievan Rus'. It adopted the Cyrillic script, developed by Saints Cyril and Methodius. Early literary works like "The Primary Chronicle" and "The Lay of Igor's Campaign" laid the foundation for Russian literature. Standardization efforts in the 18th and 19th centuries solidified the modern Russian language, influenced by literary giants such as Pushkin and Tolstoy.</p>
             </MDBCardText>
             <MDBBtn href='/login'>Learn</MDBBtn>
           </MDBCardBody>
         </MDBCard>
       </MDBCol>
 
-      <MDBCol sm='4'>
-        <MDBCard>
+      <MDBCol sm='4' className='my-3'>
+        <MDBCard  border='3' shadow='5'>
           <MDBCardBody>
             <MDBCardTitle><strong>Korean</strong></MDBCardTitle>
             <MDBCardText>

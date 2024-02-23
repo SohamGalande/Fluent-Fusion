@@ -41,7 +41,7 @@
   padding: 20px;
   border: 1px solid #ccc; /* Add border */
   border-radius: 5px; /* Add border radius */
-  background-color: #f9f9f9; /* Add background color */
+  background-color: rgba(255, 255, 255, 0.5);  /* Add background color */
 }
 
 .login-form {
@@ -66,5 +66,34 @@
 }
 
   
+.text-center {
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+  flex-direction: column; /* Arrange content in a column */
+  align-items: center; /* Center content vertically */
+  height: 100%; /* Ensure the container takes the full height */
+}
+
+.pt-1 {
+  padding-top: 1rem; /* Add top padding */
+}
+
+.mb-5 {
+  margin-bottom: 5rem; /* Add bottom margin */
+}
+
+.pb-1 {
+  padding-bottom: 1rem; /* Add bottom padding */
+}
+
+.bground{
+  background-image: url('../Shared/Images/person-with-books.jpg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
   
     

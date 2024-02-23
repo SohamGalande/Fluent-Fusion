@@ -71,7 +71,7 @@ const HomePage = () => {
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
           {topTutors.map(tutor => (
             <div key={tutor.id} style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <img src={tutor.imageUrl} alt={tutor.name} style={{ width: '100%', height: 'auto' }} />
+              <img src={tutor.imageUrl} alt={tutor.name} style={{ width: '80%', height: 'auto' }} />
               <div style={{ padding: '10px' }}>
                 <h3>{tutor.name}</h3>
                 <p><strong>Language:</strong> {tutor.language}</p>

@@ -4,9 +4,24 @@
     max-width: 50%;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 10px;
     position: relative; /* Make sure the container is positioned relatively */
-    background-color: rgba(241, 236, 236, 0.8);
+    background-color: rgba(241, 236, 236, 0.5);
+}
+
+.box1 {
+
+    background-image: url('../Shared/Images/tutorbg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.form-control{
+    margin-bottom: 10px;
 }
 
 .background-image {

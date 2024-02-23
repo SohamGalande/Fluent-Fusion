@@ -22,6 +22,7 @@ import './Login.css';
 import { useNavigate } from 'react-router-dom';
 import { FormControl, InputLabel, MenuItem, Select, Checkbox, OutlinedInput, Grid, ListItemText, Button } from '@mui/material';
 import axios from 'axios';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 
 const ITEM_HEIGHT = 48;
@@ -52,12 +53,12 @@ function Login() {
   };
 
   return (
-
+    <div className='bground'>
     <MDBContainer className="my-5 gradient-form">
       <MDBRow className="row justify-content-center">
         <MDBCol col="6" className="mb-5">
           <div className="d-flex flex-column align-items-center">
-            <div className="form-container">
+            <div className="form-container transparent-bg">
               <LoginForm handleToggleForm={handleToggleForm} isRegistering={isRegistering} />
               <RegisterForm handleToggleForm={handleToggleForm} isRegistering={isRegistering} />
             </div>
@@ -65,6 +66,7 @@ function Login() {
         </MDBCol>
       </MDBRow>
     </MDBContainer>
+    </div>
   );
 }
 
@@ -133,7 +135,7 @@ function LoginForm({ handleToggleForm, isRegistering }) {
     <MDBValidation isValidated>
       <div className={`login-form ${isRegistering ? 'fade-out' : 'fade-in'}`}>
         <div className="text-center mb-3">
-          <p>Sign in</p>
+          <p><strong style={{ color: 'black', fontWeight: 'bold' }}>Sign in</strong></p>
           {/* <div className="d-flex justify-content-between mx-auto" style={{ width: '100%' }}>
             <MDBBtn tag="a" color="none" className="m-1" style={{ color: '#1266f1' }}>
               <MDBIcon fab icon="facebook-f" size="sm" />
@@ -193,8 +195,9 @@ function LoginForm({ handleToggleForm, isRegistering }) {
 
         <div className="text-center pt-1 mb-5 pb-1">
           <MDBBtn className="mb-4 w-100 gradient-custom-2" onClick={handleSignIn}>Sign in</MDBBtn>
-          <a className="text-muted" href="#!">
+          <a className="text-muted" href="#!"><strong style={{ color: 'black', fontWeight: 'bold' }}>
             Forgot password?
+            </strong>
           </a>
         </div>
         <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
