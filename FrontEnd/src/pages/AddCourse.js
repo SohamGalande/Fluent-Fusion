@@ -20,16 +20,18 @@ const ButtonStyled = styled(Button)({
 
 const AddCourseForm = () => {
     const [formData, setFormData] = useState({
-        Coursename: '',
+        courseName: '',
         level: '',
         months: '',
-        CoursePrice: '',
-        languageName: '', 
+        coursePrice: '',
+        name: '', 
     });
     const [languages, setLanguages] = useState([]);
+    const [durations, setDurations] = useState([]);
 
     useEffect(() => {
         fetchLanguages();
+        fetchDurations();
     }, []);
 
     const fetchLanguages = async () => {
@@ -38,6 +40,15 @@ const AddCourseForm = () => {
             setLanguages(response.data);
         } catch (error) {
             console.error('Error fetching languages:', error);
+        }
+    };
+
+    const fetchDurations = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/durations');
+            setDurations(response.data); // Corrected from setLanguages
+        } catch (error) {
+            console.error('Error fetching durations:', error); // Corrected from languages
         }
     };
 
@@ -52,21 +63,20 @@ const AddCourseForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { Coursename, level, months, CoursePrice } = formData;
+            // const { Coursename, level, months, CoursePrice } = formData;
             const tutorId = sessionStorage.getItem("userId");
-            await axios.post(`http://localhost:8080/api/courses/${tutorId}`, { Coursename, level, months, CoursePrice });
+            await axios.post(`http://localhost:8080/api/course-info/update/${tutorId}`, formData);
             console.log('Course added successfully');
             // Clear the form after successful submission
             setFormData({
-                Coursename: '',
+                courseName: '',
                 level: '',
                 months: '',
-                CoursePrice: '',
-                languageName: '', 
+                coursePrice: '',
+                name: '', 
             });
         } catch (error) {
             console.error('Error adding course:', error);
-            // Handle error
             alert('Failed to add course. Please try again later.');
         }
     };
@@ -76,14 +86,32 @@ const AddCourseForm = () => {
             <Typography variant="h4" gutterBottom>Add Course</Typography>
             <form onSubmit={handleSubmit}>
                 <TextField
-                    id="Coursename"
-                    name="Coursename"
+                    id="courseName"
+                    name="courseName"
                     label="Course Name"
-                    value={formData.Coursename}
+                    value={formData.courseName}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
                 />
+                <FormControlStyled>
+                    <InputLabel id="duration-label">Duration</InputLabel>
+                    <Select
+                        labelId="duration-label"
+                        id="months"
+                        name="months"
+                        value={formData.months}
+                        onChange={handleChange}
+                        fullWidth
+                    >
+                        <MenuItem value="">
+                            <em>Select Duration</em>
+                        </MenuItem>
+                        {durations.map(duration => ( // Changed from languages
+                            <MenuItem key={duration.id} value={duration.months}>{duration.months}</MenuItem>
+                        ))}
+                    </Select>
+                </FormControlStyled>
                 <FormControlStyled>
                     <InputLabel id="level-label">Level</InputLabel>
                     <Select
@@ -105,35 +133,25 @@ const AddCourseForm = () => {
                     <InputLabel id="language-label">Language</InputLabel>
                     <Select
                         labelId="language-label"
-                        id="languageName"
-                        name="languageName" 
-                        value={formData.languageName}
+                        id="name"
+                        name="name"
+                        value={formData.name}
                         onChange={handleChange}
                         fullWidth
                     >
                         <MenuItem value="">
                             <em>Select Language</em>
                         </MenuItem>
-                        {languages.map(language => (
+                        {languages.map(language => ( // Changed from durations
                             <MenuItem key={language.id} value={language.name}>{language.name}</MenuItem>
                         ))}
                     </Select>
                 </FormControlStyled>
                 <TextField
-                    id="months"
-                    name="months"
-                    label="Duration (Months)"
-                    value={formData.months}
-                    onChange={handleChange}
-                    type="number"
-                    fullWidth
-                    margin="normal"
-                />
-                <TextField
-                    id="CoursePrice"
-                    name="CoursePrice"
+                    id="coursePrice"
+                    name="coursePrice"
                     label="Course Price"
-                    value={formData.CoursePrice}
+                    value={formData.coursePrice}
                     onChange={handleChange}
                     fullWidth
                     margin="normal"
