@@ -1,11 +1,8 @@
 import React, { useState } from 'react';
 import './TutorRegistration.css';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 import img from '../Shared/Images/background2.jpg'; 
-import img1 from '../Shared/Images/tutorbg.jpg'; 
-
 
 
 export default function TutorRegistration() {
