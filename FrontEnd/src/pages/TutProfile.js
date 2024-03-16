@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
@@ -34,7 +34,7 @@ const TutProfile = () => {
                     <MDBCard>
                        <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#F3B95F', height: '200px' }}>
                                 <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                                    {/* Render the tutor's profile picture here */}
+                                    
                                     {tutorData && <MDBCardImage src={`data:image/jpeg;base64,${tutorData.profilePic}`} alt="Profile Picture" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} />}
                                     <MDBBtn outline color="dark" style={{height: '36px', overflow: 'visible'}}>
                                         Edit
@@ -43,7 +43,6 @@ const TutProfile = () => {
                            
                         <div className="ms-3" style={{ marginTop: '130px' }}>
                         <MDBTypography tag="h5">{tutorData ? tutorData.fullname : 'Name'}</MDBTypography>
-                        <MDBCardText>City/Country</MDBCardText>
                         </div>
                     </div>
                     <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
@@ -56,10 +55,6 @@ const TutProfile = () => {
                             <MDBCardText className="mb-1 h5">French</MDBCardText>
                             <MDBCardText className="small text-muted mb-0">Language Tutor</MDBCardText>
                         </div>
-                        {/* <div>
-                            <MDBCardText className="mb-1 h5">478</MDBCardText>
-                            <MDBCardText className="small text-muted mb-0">Following</MDBCardText>
-                        </div> */}
                         </div>
                     </div>
                     <MDBCardBody className="text-black p-4">
@@ -69,37 +64,11 @@ const TutProfile = () => {
                             <MDBCardText className="font-italic mb-1">Email: {tutorData ? tutorData.email : 'Email'}</MDBCardText>
                             <MDBCardText className="font-italic mb-0">Language: {tutorData ? tutorData.language : 'Language'}</MDBCardText>
                             <MDBCardText className='font-italic mb-0'>Proficiency Level: {tutorData ? tutorData.proficiencyLevel : 'Proficiency Level'}</MDBCardText>
-                            userId: {userId}
+                            <MDBCardText className="font-italic mb-0"> Tutor Id:  {userId}</MDBCardText>
+                            
                         </div>
                         </div>
-                        {/* <div className="d-flex justify-content-between align-items-center mb-4">
-                        <MDBCardText className="lead fw-normal mb-0">Demo</MDBCardText>
-                        <MDBCardText className="mb-0"><a href="#!" className="text-muted">Show all</a></MDBCardText>
-                        </div> */}
-                        {/* <MDBRow>
-                        <MDBCol className="mb-2">
-                            <video class="img-fluid" controls>
-                            <source src="https://www.youtube.com/watch?v=VQyA--o5Efw.mp4" type="video/mp4" />
-                            </video>
-                        </MDBCol>
-                        <MDBCol className="mb-2">
-                            <video class="img-fluid" controls>
-                            <source src="https://mdbootstrap.com/img/video/animation-intro.mp4" type="video/mp4" />
-                            </video>
-                        </MDBCol>
-                        </MDBRow>
-                        <MDBRow className="g-2">
-                        <MDBCol className="mb-2">
-                            <video class="img-fluid" controls>
-                            <source src="https://mdbootstrap.com/img/video/animation-intro.mp4" type="video/mp4" />
-                            </video>
-                        </MDBCol>
-                        <MDBCol className="mb-2">
-                            <video class="img-fluid" controls>
-                            <source src="https://mdbootstrap.com/img/video/animation-intro.mp4" type="video/mp4" />
-                            </video>
-                        </MDBCol>
-                        </MDBRow> */}
+                       
 
                         <MDBCardText className="lead fw-normal mb-0">Live Session</MDBCardText>
                         <p><strong>Link </strong> - Live Session Link</p>

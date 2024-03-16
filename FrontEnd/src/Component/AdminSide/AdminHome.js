@@ -6,10 +6,6 @@ import AdminNavBar from './AdminNavBar'
 const AdminHome = () => {
     const [languages, setStudents] = useState([]);
 
-    const [textInput, setTextInput] = useState('');
-    const handleChange = (event) => {
-        setTextInput(event.target.value);
-    };
 
     useEffect(() => {
         // Fetch language
@@ -21,16 +17,22 @@ const AdminHome = () => {
 
         
       
-
     const handleSubmit = (event) => {
         event.preventDefault();
-        
-        // Send the text input to the backend
-        axios.post('http://localhost:8080/language', { languages: textInput })
+
+        const formData = new FormData(event.target);
+        const name = formData.get('name');
+
+        const newLanguage = {
+            name: name
+        };
+
+        axios.post('http://localhost:8080/api/languages', newLanguage)
             .then(response => {
                 console.log('Language saved successfully:', response.data);
-                // Optionally, reset the input field
-                setTextInput('');
+              
+
+                event.target.reset(); // Reset the form after successful submission
             })
             .catch(error => {
                 console.error('Error saving language:', error);
@@ -45,7 +47,7 @@ const AdminHome = () => {
             <form onSubmit={handleSubmit}>
                 <h2 style={{ fontStyle: 'bold' }}>Add Language:</h2>
                 <div>
-                    <input type='text' id='addland' style={{ width: '500px' }} value={textInput} onChange={handleChange} />
+                    <input type='text' id='name' name='name'  style={{ width: '500px' }} />
                 </div>
                 <button type="submit">ADD Language</button>
             </form>

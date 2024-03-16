@@ -1,61 +1,48 @@
-import React from 'react';
+import React ,{ useEffect } from 'react';
 import Layout from './Layout';
 import Sliderbar from './Sliderbar';
 import CardLanguages from './CardLanguages';
+import axios from 'axios';
+import styled from 'styled-components';
+import { useState } from 'react';
+
+
+const CourseCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+
+const CourseCard = styled.div`
+  width: calc(30% - 10px);
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+`;
+
+const TutorImage = styled.img`
+  width: 100%;
+  height: auto;
+`;
 
 const HomePage = () => {
+  const [courseInfoList, setCourseInfoList] = useState([]);
 
-  const topTutors = [
-    {
-      id: 1,
-      name: "John Doe",
-      language: "English",
-      price: "$30/hr",
-      time: "Available Mon-Fri, 9am-5pm",
-      imageUrl: "https://via.placeholder.com/150"
-    },
-    {
-      id: 2,
-      name: "Jane Smith",
-      language: "Spanish",
-      price: "$25/hr",
-      time: "Available Tue-Sat, 10am-6pm",
-      imageUrl: "https://via.placeholder.com/150"
-    },
-    {
-        id: 3,
-        name: "John Doe",
-        language: "English",
-        price: "$30/hr",
-        time: "Available Mon-Fri, 9am-5pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-      {
-        id: 4,
-        name: "Jane Smith",
-        language: "Spanish",
-        price: "$25/hr",
-        time: "Available Tue-Sat, 10am-6pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-      {
-        id: 5,
-        name: "John Doe",
-        language: "English",
-        price: "$30/hr",
-        time: "Available Mon-Fri, 9am-5pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-      {
-        id: 6,
-        name: "Jane Smith",
-        language: "Spanish",
-        price: "$25/hr",
-        time: "Available Tue-Sat, 10am-6pm",
-        imageUrl: "https://via.placeholder.com/150"
-      },
-    // Add more top tutors as needed
-  ];
+  useEffect(() => {
+    fetchCourseInfo();
+  }, []);
+
+  const fetchCourseInfo = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/course-info/all');
+      setCourseInfoList(response.data);
+    } catch (error) {
+      console.error('Error fetching course info:', error);
+    }
+  };
+
+
 
   return (
     <Layout>
@@ -66,32 +53,31 @@ const HomePage = () => {
       <br></br>
       <br></br>
 
-      <div className="learning-resources">
-        <h2>Top Tutors</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {topTutors.map(tutor => (
-            <div key={tutor.id} style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <img src={tutor.imageUrl} alt={tutor.name} style={{ width: '80%', height: 'auto' }} />
-              <div style={{ padding: '10px' }}>
-                <h3>{tutor.name}</h3>
-                <p><strong>Language:</strong> {tutor.language}</p>
-                <p><strong>Price:</strong> {tutor.price}</p>
-                <p><strong>Availability:</strong> {tutor.time}</p>
-                <div style={{ marginTop: '10px' }}>
-                  <a href='./login'>
-                    <button style={{ marginRight: '10px' }}>Book</button>
-                  </a>
+      <div>
+        <CourseCardContainer>
+          {courseInfoList.map((courseInfo) => (
+            <CourseCard key={courseInfo.id}>
+              <h3>{courseInfo.courseName}</h3>
+              <TutorImage src={`data:image/jpeg;base64,${courseInfo.image}`} alt={courseInfo.tutorName} />
+              <p>Tutor: {courseInfo.tutorName}</p>
+              <p>Language: {courseInfo.name}</p>
+              <p>Level: {courseInfo.level}</p>
+              <p>Duration: {courseInfo.months} months</p>
+              <p>Price: {courseInfo.coursePrice}</p>
+              <a href='./login'>
+                <button style={{ marginRight: '10px' }}>Book</button>
+              </a>
 
-                  
-                  
-                </div>
-              </div>
-            </div>
+            </CourseCard>
           ))}
-        </div>
+        </CourseCardContainer>
       </div>
-          
-            
+
+
+
+
+
+
 
     </Layout>
   );

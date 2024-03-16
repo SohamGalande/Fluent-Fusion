@@ -1,11 +1,40 @@
 import React, { useState, useEffect } from 'react';
-import '../Style/StudHome.css';
 import axios from 'axios';
+import styled from 'styled-components';
+
+const CourseCardContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
+const CourseCard = styled.div`
+  width: calc(30% - 10px);
+  margin-bottom: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+`;
+
+const TutorImage = styled.img`
+  width: 100%;
+  height: auto;
+`;
+
+const BookingButton = styled.button`
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+`;
 
 const StudHome = () => {
   const [language, setLanguage] = useState('');
   const [priceRange, setPriceRange] = useState('');
   const [country, setCountry] = useState('');
+  const [courseInfoList, setCourseInfoList] = useState([]);
 
   // Function to handle filter changes
   const handleFilterChange = (filterName, value) => {
@@ -24,75 +53,18 @@ const StudHome = () => {
     }
   };
 
-  
-  const [courseInfoList, setCourseInfoList] = useState([]);
-  
   useEffect(() => {
     fetchCourseInfo();
   }, []);
 
   const fetchCourseInfo = async () => {
     try {
-      const response = await axios.get('/api/course-info');
+      const response = await axios.get('http://localhost:8080/api/course-info/all');
       setCourseInfoList(response.data);
     } catch (error) {
       console.error('Error fetching course info:', error);
     }
   };
-
-  // const topTutors = [
-  //   {
-  //     id: 1,
-  //     name: "John Doe",
-  //     language: "English",
-  //     price: "$30/hr",
-  //     time: "Available Mon-Fri, 9am-5pm",
-  //     imageUrl: "https://via.placeholder.com/150"
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Jane Smith",
-  //     language: "Spanish",
-  //     price: "$25/hr",
-  //     time: "Available Tue-Sat, 10am-6pm",
-  //     imageUrl: "https://via.placeholder.com/150"
-  //   },
-  //   {
-  //       id: 3,
-  //       name: "John Doe",
-  //       language: "English",
-  //       price: "$30/hr",
-  //       time: "Available Mon-Fri, 9am-5pm",
-  //       imageUrl: "https://via.placeholder.com/150"
-  //     },
-  //     {
-  //       id: 4,
-  //       name: "Jane Smith",
-  //       language: "Spanish",
-  //       price: "$25/hr",
-  //       time: "Available Tue-Sat, 10am-6pm",
-  //       imageUrl: "https://via.placeholder.com/150"
-  //     },
-  //     {
-  //       id: 5,
-  //       name: "John Doe",
-  //       language: "English",
-  //       price: "$30/hr",
-  //       time: "Available Mon-Fri, 9am-5pm",
-  //       imageUrl: "https://via.placeholder.com/150"
-  //     },
-  //     {
-  //       id: 6,
-  //       name: "Jane Smith",
-  //       language: "Spanish",
-  //       price: "$25/hr",
-  //       time: "Available Tue-Sat, 10am-6pm",
-  //       imageUrl: "https://via.placeholder.com/150"
-  //     },
-  //   // Add more top tutors as needed
-  // ];
-
-
 
   // Function to handle filter button click
   const handleFilterClick = () => {
@@ -105,96 +77,59 @@ const StudHome = () => {
 
   return (
     <div className="homepage">
-      
       <div className="filters">
-
-      <div className="language-form-container">
-        <div>
-          <label htmlFor="language">Select Language to Learn:</label>
-          <select id="language" onChange={(e) => this.handleFilterChange('language', e.target.value)}>
-            <option value="">Language</option>
-            <option value="english">English</option>
-            <option value="spanish">Spanish</option>
-            <option value="french">French</option>
-            {/* Add more languages as needed */}
-          </select>
-        </div>
-
-        
-        <div>
-          <label htmlFor="priceRange">Select Price Range:</label>
-          <input
-            type="range"
-            id="priceRange"
-            name="priceRange"
-            min="500"
-            max="2500"
-            onChange={(e) => console.log('Selected price:', e.target.value)}
-          />
-        
-      
-        </div>
-
-        <div>
-          <label htmlFor="country">Select Country Tutor:</label>
-          <select id="country" onChange={(e) => this.handleFilterChange('country', e.target.value)}>
-            <option value="">Select Country</option>
-            <option value="usa">USA</option>
-            <option value="uk">UK</option>
-            <option value="canada">Canada</option>
-            {/* Add more countries as needed */}
-          </select>
-        </div>
-
-        <button onClick={handleFilterClick} >Filter</button>
-
-
-      </div>
-        
-      </div>
-
-      
-      <div>
-        {courseInfoList.map((courseInfo) => (
-          <div key={courseInfo.id} style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-
-          <p>Name: {courseInfo.coursename}</p>
-          <p>Tutor: {courseInfo.tutor.name}</p>
-          <p>Language: {courseInfo.language.name}</p>
-          <p>Duration: {courseInfo.duration.months} months</p>
-          <p>Price: {courseInfo.price}</p>
-        
+        <div className="language-form-container">
+          <div>
+            <label htmlFor="language">Select Language to Learn:</label>
+            <select id="language" onChange={(e) => handleFilterChange('language', e.target.value)}>
+              <option value="">Language</option>
+              <option value="english">English</option>
+              <option value="spanish">Spanish</option>
+              <option value="french">French</option>
+              {/* Add more languages as needed */}
+            </select>
           </div>
-
-        ))}
-      </div>
-
-{/* 
-      <div className="learning-resources">
-        <h2>Top Tutors</h2>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'space-between' }}>
-          {topTutors.map(tutor => (
-            <div key={tutor.id} style={{ width: 'calc(33.33% - 20px)', marginBottom: '20px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <img src={tutor.imageUrl} alt={tutor.name} style={{ width: '100%', height: 'auto' }} />
-              <div style={{ padding: '10px' }}>
-                <h3>{tutor.name}</h3>
-                <p><strong>Language:</strong> {tutor.language}</p>
-                <p><strong>Price:</strong> {tutor.price}</p>
-                <p><strong>Availability:</strong> {tutor.time}</p>
-                <div style={{ marginTop: '10px' }}>
-                  <button style={{ marginRight: '10px' }}>Book</button>
-                  
-                </div>
-              </div>
-            </div>
-          ))}
+          <div>
+            <label htmlFor="priceRange">Select Price Range:</label>
+            <input
+              type="range"
+              id="priceRange"
+              name="priceRange"
+              min="500"
+              max="2500"
+              onChange={(e) => console.log('Selected price:', e.target.value)}
+            />
+          </div>
+          <div>
+            <label htmlFor="country">Select Country Tutor:</label>
+            <select id="country" onChange={(e) => handleFilterChange('country', e.target.value)}>
+              <option value="">Select Country</option>
+              <option value="usa">USA</option>
+              <option value="uk">UK</option>
+              <option value="canada">Canada</option>
+              {/* Add more countries as needed */}
+            </select>
+          </div>
+          <button onClick={handleFilterClick}>Filter</button>
         </div>
-      </div> */}
-
-
+      </div>
+      <CourseCardContainer>
+        {courseInfoList.map((courseInfo) => (
+          <CourseCard key={courseInfo.id}>
+            <h3>{courseInfo.courseName}</h3>
+            <TutorImage src={`data:image/jpeg;base64,${courseInfo.image}`} alt={courseInfo.tutorName} />
+            <p>Tutor: {courseInfo.tutorName}</p>
+            <p>Language: {courseInfo.name}</p>
+            <p>Level: {courseInfo.level}</p>
+            <p>Duration: {courseInfo.months} months</p>
+            <p>Price: {courseInfo.coursePrice}</p>
+            <BookingButton>Book Now</BookingButton>
+          
+          </CourseCard>
+        ))}
+      </CourseCardContainer>
     </div>
   );
 };
-
 
 export default StudHome;

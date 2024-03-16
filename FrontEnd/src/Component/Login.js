@@ -23,6 +23,7 @@ import { useNavigate } from 'react-router-dom';
 import { FormControl, InputLabel, MenuItem, Select, Checkbox, OutlinedInput, Grid, ListItemText, Button, TextField } from '@mui/material';
 import axios from 'axios';
 import { text } from '@fortawesome/fontawesome-svg-core';
+import { faArrowUpFromWaterPump } from '@fortawesome/free-solid-svg-icons';
 
 
 const ITEM_HEIGHT = 48;
@@ -39,18 +40,18 @@ function Login() {
 
   return (
     <div className='bground'>
-    <MDBContainer className="my-5 gradient-form">
-      <MDBRow className="row justify-content-center">
-        <MDBCol col="6" className="mb-5">
-          <div className="d-flex flex-column align-items-center">
-            <div className="form-container transparent-bg">
-              <LoginForm handleToggleForm={handleToggleForm} isRegistering={isRegistering} />
-              <RegisterForm handleToggleForm={handleToggleForm} isRegistering={isRegistering} />
+      <MDBContainer className="my-5 gradient-form">
+        <MDBRow className="row justify-content-center">
+          <MDBCol col="6" className="mb-5">
+            <div className="d-flex flex-column align-items-center">
+              <div className="form-container transparent-bg">
+                <LoginForm handleToggleForm={handleToggleForm} isRegistering={isRegistering} />
+                <RegisterForm handleToggleForm={handleToggleForm} isRegistering={isRegistering} />
+              </div>
             </div>
-          </div>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
     </div>
   );
 }
@@ -63,77 +64,61 @@ function LoginForm({ handleToggleForm, isRegistering }) {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       [name]: value
-    });
+    }));
   };
 
   const handleRadioChange = (e) => {
     const { value } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prevFormData) => ({
+      ...prevFormData,
       role: value
-    });
+    }));
   };
+
 
   const handleSignIn = async (e) => {
     e.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:8080/login', formData);
-      sessionStorage.setItem("isLoggedIn", true);
-      console.log('Response:', response);
-      const { role } = formData;
-      console.log(formData);
-      console.log("role", role);
+      console.log(response.data);
+
+      // Check for various response status codes
       if (response.status === 200) {
         const { role, id } = response.data;
-
         if (role === 'student') {
-          console.log(id);
           sessionStorage.setItem('Studentid', id);
           alert("You are logged in as a Student");
           navigate('/student');
-        }
-        else if (role === 'tutor') {
-          console.log(id);
+        } else if (role === 'tutor') {
           sessionStorage.setItem('userId', id);
-          alert("you are logged in as a Tutor");
+          alert("You are logged in as a Tutor");
           navigate('/tutor');
+        } else {
+
+          throw new Error('Invalid role received from the server');
         }
+      } else {
+
+        throw new Error('Invalid response received from the server');
       }
-      else {
-        throw new Error('Invalid credentials! Please check your username or password.');
-      }
+    } catch (error) {
+
+      console.error('Error during login:', error);
+
+      alert('An error occurred during login. Please try again later.');
     }
-    catch (err) {
-      setError(err.message);
-    }
+
   };
-
-
-
 
   return (
     <MDBValidation isValidated>
       <div className={`login-form ${isRegistering ? 'fade-out' : 'fade-in'}`}>
         <div className="text-center mb-3">
           <p>Sign in</p>
-          {/* <div className="d-flex justify-content-between mx-auto" style={{ width: '100%' }}>
-            <MDBBtn tag="a" color="none" className="m-1" style={{ color: '#1266f1' }}>
-              <MDBIcon fab icon="facebook-f" size="sm" />
-            </MDBBtn>
-            <MDBBtn tag="a" color="none" className="m-1" style={{ color: '#1266f1' }}>
-              <MDBIcon fab icon="twitter" size="sm" />
-            </MDBBtn>
-            <MDBBtn tag="a" color="none" className="m-1" style={{ color: '#1266f1' }}>
-              <MDBIcon fab icon="google" size="sm" />
-            </MDBBtn>
-            <MDBBtn tag="a" color="none" className="m-1" style={{ color: '#1266f1' }}>
-              <MDBIcon fab icon="github" size="sm" />
-            </MDBBtn>
-          </div> */}
         </div>
         <MDBInput
           wrapperClass="mb-4"
@@ -141,7 +126,7 @@ function LoginForm({ handleToggleForm, isRegistering }) {
           id="name"
           name='name'
           type="text"
-          value={formData.fullname}
+          value={formData.name}
           onChange={handleInputChange}
           required
         />
@@ -180,7 +165,7 @@ function LoginForm({ handleToggleForm, isRegistering }) {
           <MDBBtn className="mb-4 w-100 gradient-custom-2" onClick={handleSignIn}>Sign in</MDBBtn>
           <a className="text-muted" href="#!"><strong style={{ color: 'black', fontWeight: 'bold' }}>
             Forgot password?
-            </strong>
+          </strong>
           </a>
         </div>
         <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
@@ -189,10 +174,10 @@ function LoginForm({ handleToggleForm, isRegistering }) {
           </MDBBtn>
         </div>
       </div>
-
     </MDBValidation>
   );
 }
+
 
 
 
@@ -247,35 +232,35 @@ function RegisterForm({ handleToggleForm, isRegistering }) {
               <FormControl fullWidth>
                 <InputLabel htmlFor="fullname">Full Name</InputLabel>
                 {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" type="text" name="fullname" inputProps={{name:"fullname"}} value={formData.fullname} onChange={handleFormChange} required  /> */}
-                <OutlinedInput id="fullname" type="text" name="fullname" inputProps={{name:"fullname"}} value={formData.fullname} onChange={handleFormChange} required />
+                <OutlinedInput id="fullname" type="text" name="fullname" inputProps={{ name: "fullname" }} value={formData.fullname} onChange={handleFormChange} required />
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="email">Email</InputLabel>
-                <OutlinedInput id="email" type="email" name="email" inputProps={{name:"email"}} value={formData.email} onChange={handleFormChange} required />
+                <OutlinedInput id="email" type="email" name="email" inputProps={{ name: "email" }} value={formData.email} onChange={handleFormChange} required />
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="contact">Contact</InputLabel>
-                <OutlinedInput id="contact" type="text" name="contact" inputProps={{name:"contact"}} value={formData.contact} onChange={handleFormChange} pattern="[0-9]+" maxLength="11" />
+                <OutlinedInput id="contact" type="text" name="contact" inputProps={{ name: "contact" }} value={formData.contact} onChange={handleFormChange} pattern="[0-9]+" maxLength="11" />
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel htmlFor="role">Role</InputLabel>
-                <OutlinedInput id="role" type="text" name="role" inputProps={{name:"role"}} value={formData.role} onChange={handleFormChange} placeholder="Student,Tutor" required />
+                <OutlinedInput id="role" type="text" name="role" inputProps={{ name: "role" }} value={formData.role} onChange={handleFormChange} placeholder="Student,Tutor" required />
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth className="mb-3">
                 <InputLabel htmlFor="password">Password</InputLabel>
-                <OutlinedInput id="password" type="password" name="password" inputProps={{name:"password"}} value={formData.password} onChange={handleFormChange} required />
+                <OutlinedInput id="password" type="password" name="password" inputProps={{ name: "password" }} value={formData.password} onChange={handleFormChange} required />
               </FormControl>
             </Grid>
           </Grid>

@@ -1,30 +1,28 @@
-import React from 'react'
-import { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
 
 const StudProfile = () => {
-
     const [studentData, setStudentData] = useState(null);
-    
-   
-   useEffect(() => { const fetchStudentData = async () => {
-        try {
-            const Studentid = sessionStorage.getItem('Studentid');
-    
-            if (Studentid) {
-                const response = await axios.get(`http://localhost:8080/Student/details/${Studentid}`);
-                setStudentData(response.data);
-            } else {
-                console.error('User ID not found in sessionStorage');
+
+    useEffect(() => {
+        const fetchStudentData = async () => {
+            try {
+                const studentId = sessionStorage.getItem('Studentid');
+
+                if (studentId) {
+                    const response = await axios.get(`http://localhost:8080/Student/details/${studentId}`);
+                    setStudentData(response.data);
+                } else {
+                    console.error('User ID not found in sessionStorage');
+                }
+            } catch (error) {
+                console.error('Error fetching student data:', error);
             }
-        } catch (error) {
-            console.error('Error fetching student data:', error);
-        }
-    };
-    fetchStudentData();
-},[]);
-    
+        };
+
+        fetchStudentData();
+    }, []);
 
     return (
         <div className="gradient-custom-2" style={{ backgroundColor: '#9de2ff' }}>
@@ -42,43 +40,28 @@ const StudProfile = () => {
                                 </div>
                                 <div className="ms-3" style={{ marginTop: '130px' }}>
                                     <MDBTypography tag="h5">{studentData ? studentData.fullname : 'Name'}</MDBTypography>
-                                    {/* <MDBCardText>City/Country</MDBCardText> */}
                                 </div>
                             </div>
                             <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
                                 <div className="d-flex justify-content-end text-center py-1">
-                                    {/* <div>
-                            <MDBCardText className="mb-1 h5">253</MDBCardText>
-                            <MDBCardText className="small text-muted mb-0">No. of Active Students</MDBCardText>
-                        </div>
-                        <div className="px-3">
-                            <MDBCardText className="mb-1 h5">French</MDBCardText>
-                            <MDBCardText className="small text-muted mb-0">Language Tutor</MDBCardText>
-                        </div> */}
-
+                                    {/* Additional details can be added here */}
                                 </div>
                             </div>
                             <MDBCardBody className="text-black p-4">
                                 <div className="mb-5">
                                     <p className="lead fw-normal mb-1">About</p>
                                     <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                                        {/* <MDBCardText className="font-italic mb-1">QUALIFICATION</MDBCardText>
-                            <MDBCardText className="font-italic mb-1">Lives in CITY</MDBCardText>
-                            <MDBCardText className="font-italic mb-0">LANGUAGES KNOWN</MDBCardText> */}
                                         <MDBCardText className='font-italic mb-1'>Email: {studentData ? studentData.email : 'Email'}</MDBCardText>
                                         <MDBCardText className='font-italic mb-1'>Contact: {studentData ? studentData.contact : 'Contact'}</MDBCardText>
-                                        {/* <MDBCardText className='font-italic mb-1'>Current Language learning: {studentData ? studentData.currentLanguage : 'Current Language'}</MDBCardText> */}
                                     </div>
                                 </div>
-
-
                             </MDBCardBody>
                         </MDBCard>
                     </MDBCol>
                 </MDBRow>
             </MDBContainer>
         </div>
-    )
-}
+    );
+};
 
-export default StudProfile
+export default StudProfile;
